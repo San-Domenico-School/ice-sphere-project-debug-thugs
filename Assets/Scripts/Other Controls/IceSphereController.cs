@@ -69,4 +69,13 @@ public class IceSphereController : MonoBehaviour
         transform.localScale *= reductionEachRepeat;
         Dissolution();
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            transform.position = Vector3.up * 25;
+            GameManager.Instance.switchLevel = true;
+        }
+    }
 }
