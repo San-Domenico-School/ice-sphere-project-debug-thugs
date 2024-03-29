@@ -6,24 +6,30 @@ using TMPro;
 
 public class UIController : MonoBehaviour
 {
-
+    
     [SerializeField] private Image[] captionImage;         // CaptionImage that holds the text child
     [SerializeField] private float typingSpeed;            // The speed of typing in seconds
     [SerializeField] private bool keepPastCaptions;        // Keep all captions on screen 
     private TextMeshProUGUI textComponent;                 // Text child of the Caption Image
     private Coroutine typingCoroutine;                     // Reference to the typing coroutine
     private string textToType;                             // The text to be typed
-    private int captionIndex;                              // Current caption being typed starting at zero
+    private int captionIndex;
+    public static bool textTrigger;
+                                                                // Current caption being typed starting at zero
 
     private void Update()
     {
         UserInput();
+        if(textTrigger)
+        {
+            
+        }
     }
 
     private void UserInput()
     {
         // Start typing by pressing any key.
-        if (Input.GetKey(KeyCode.Tab) && typingCoroutine == null)
+        if (textTrigger && typingCoroutine == null)
         {
             if (captionIndex < captionImage.Length)
             {
@@ -66,5 +72,6 @@ public class UIController : MonoBehaviour
         // Move to next caption
         captionIndex++;
         typingCoroutine = null;
+
     }
 }
