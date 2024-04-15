@@ -20,10 +20,6 @@ public class UIController : MonoBehaviour
     private void Update()
     {
         UserInput();
-        if(textTrigger)
-        {
-            
-        }
     }
 
     private void UserInput()
@@ -46,7 +42,7 @@ public class UIController : MonoBehaviour
     {
         if (keepPastCaptions && captionIndex != 0)
         {
-            captionImage[captionIndex - 1].gameObject.SetActive(false);
+            captionImage[captionIndex -1].gameObject.SetActive(false);
         }
     }
 
