@@ -43,9 +43,12 @@ public class PlayerController : MonoBehaviour
     // Adds OnMovement events to inputAction's Player's movement
     private void OnEnable()
     {
+
         inputAction.Enable();
         inputAction.Player.Movement.performed += OnMovementPerformed;
         inputAction.Player.Movement.canceled += OnMovementCanceled;
+
+      
     }
 
     // Remove OnMovement events to inputAction's Player's movement
@@ -123,6 +126,10 @@ public class PlayerController : MonoBehaviour
         if(other.gameObject.CompareTag("Portal"))
         {
             gameObject.layer = LayerMask.NameToLayer("Portal");
+
+            this.gameObject.SetActive(false);
+            GameManager.Instance.switchLevel = true;
+
         }
 
         if(other.gameObject.CompareTag("PowerUp"))
@@ -145,6 +152,8 @@ public class PlayerController : MonoBehaviour
             {
                 transform.position = Vector3.up * 25;
                 GameManager.Instance.switchLevel = true;
+                GameManager.Instance.playerActive = false;
+                this.gameObject.SetActive(false);
             }
         }
     }
@@ -157,5 +166,14 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(cooldown);
         hasPowerUp = false;
         powerUpIndicator.intensity = 0.0f;
+    }
+
+    private void RestartScene()
+    {
+        // Get the current scene index
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+
+        // Reload the current scene
+        SceneManager.LoadScene(currentSceneIndex);
     }
 }
