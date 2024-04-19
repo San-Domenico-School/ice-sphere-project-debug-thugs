@@ -40,9 +40,9 @@ public class UIController : MonoBehaviour
 
     private void SetCaptionInactive()
     {
-        if (keepPastCaptions && captionIndex != 0)
+        if (!keepPastCaptions && captionIndex != 0)
         {
-            captionImage[captionIndex -1].gameObject.SetActive(false);
+            captionImage[captionIndex - 1].gameObject.SetActive(false);
         }
     }
 
@@ -61,7 +61,7 @@ public class UIController : MonoBehaviour
         {
             textComponent.text += textToType[i];  // Add the next character to the textComponent
             if (textToType[i].Equals(",")) typingSpeedThisCharacter *= 1.5f;
-            if (textToType[i].Equals(".")) typingSpeedThisCharacter *= 2.0f;
+            if (textToType[i].Equals(".")) typingSpeedThisCharacter *= 20.0f;
             yield return new WaitForSeconds(typingSpeedThisCharacter);  // Wait for typingSpeed seconds before typing the next character
         }
 
