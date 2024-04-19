@@ -75,7 +75,7 @@ public class IceSphereController : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             transform.position = Vector3.up * 25;
-            GameManager.Instance.switchLevel = true;
+            GameManager.Instance.RestartScene();
         }
     }
 }
