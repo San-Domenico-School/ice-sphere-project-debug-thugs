@@ -8,6 +8,7 @@ TagManager:
   - Portal
   - PowerUp
   - Startup
+  - Fox
   layers:
   - Default
   - TransparentFX
