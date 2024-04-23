@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+
 
 /************************************************************************
  * PlayerController is attached to the Player  It moves the player with 
@@ -154,6 +156,7 @@ public class PlayerController : MonoBehaviour
                 GameManager.Instance.switchLevel = true;
                 GameManager.Instance.playerActive = false;
                 this.gameObject.SetActive(false);
+
             }
         }
     }
@@ -167,7 +170,6 @@ public class PlayerController : MonoBehaviour
         hasPowerUp = false;
         powerUpIndicator.intensity = 0.0f;
     }
-
 
     private void RestartScene()
     {
