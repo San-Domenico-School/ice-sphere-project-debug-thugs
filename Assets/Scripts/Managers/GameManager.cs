@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
     public float playerMoveForce;
     public float playerBounce;
     public float playerRepelForce;
+    public GameObject player;
+
 
     // Length determined in the GDD
     [Header("Levels Fields")]
@@ -36,8 +38,12 @@ public class GameManager : MonoBehaviour
     public bool debugSpawnPowerUp;
     public bool debugTransport;
 
+
     public bool switchLevel { private get; set; }   // Set from player trigger when player passes through portal
-    public bool gameOver { private get; set; }      // Set from player with it falls below -10 meter 
+    public bool gameOver { private get; set; }      // Set from player with it falls below -10 meter
+    public bool playerActive { private get; set; }      // Set from player with it falls below -10 meter
+
+    public bool resetLevel { get; set; }
 
     // Awake is called before any Start methods are called  It insures that the Game Manager is
     // there for the Player and Ice SPhere to get field valued from the GDD
@@ -51,6 +57,14 @@ public class GameManager : MonoBehaviour
         //This is useful so that we cannot have more than one GameManager object in a scene at a time.
         else if (Instance != this)
             Destroy(this);
+
+
+        GameObject player = Resources.FindObjectsOfTypeAll<PlayerController>()[0].gameObject;
+        player.transform.position = Vector3.up * 25;
+        player.SetActive(true);
+        //find the player and set it active
+
+
     }
 
     // Update is called once per frame checking if ready to switch levels
@@ -59,7 +73,10 @@ public class GameManager : MonoBehaviour
         if(switchLevel)
         {
             SwitchLevels();
+
+
         }
+        
     }
 
     // Extracts the level number from the string to set then load the next level.
@@ -70,6 +87,7 @@ public class GameManager : MonoBehaviour
 
         // Get the name of the currently active scene
         string currentScene = SceneManager.GetActiveScene().name;
+        Debug.Log(currentScene);
 
         // Extract the level number from the scene name
         int nextLevel = int.Parse(currentScene.Substring(5)) + 1;
@@ -88,4 +106,16 @@ public class GameManager : MonoBehaviour
             Debug.Log("You won");
         }
     }
+
+    private void RestartScene()
+    {
+        // Get the current scene index
+        string sceneName = SceneManager.GetActiveScene().name;
+
+        // Reload the current scene
+        SceneManager.LoadScene(sceneName);
+    }
+
+
+
 }
