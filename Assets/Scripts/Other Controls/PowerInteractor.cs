@@ -34,13 +34,14 @@ public class PowerInteractor : MonoBehaviour
 
             // Gets the players controlling script component
             PlayerController playerController = player.GetComponent<PlayerController>();
+            PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
 
             // Creates a normalized vector that points from the IceSphere towards the player
             Vector3 direction = (player.transform.position - transform.position).normalized;
 
             // Determines if the ice sphere pushes the player or if the player repels the ice sphere
             // based on it the powerup is active.
-            if (playerController.hasPowerUp)
+            if (playerMovement.hasPowerUp)
             { 
                 iceSphereRB.AddForce(-direction * playerRB.mass * GameManager.Instance.playerRepelForce, ForceMode.Impulse);
             }
