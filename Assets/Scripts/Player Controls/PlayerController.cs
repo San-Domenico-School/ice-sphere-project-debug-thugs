@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+
 
 /************************************************************************
  * PlayerController is attached to the Player  It moves the player with 
@@ -112,7 +114,7 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         // Changes Startup to ground so that the player is not constantly updating while colliding with the ground
-        if(collision.gameObject.CompareTag("Startup"))
+        if(collision.gameObject.CompareTag("Startup") || collision.gameObject.CompareTag("Ground"))
         {
             collision.gameObject.tag = "Ground";
             playerCollider.material.bounciness = GameManager.Instance.playerBounce;
@@ -154,6 +156,7 @@ public class PlayerController : MonoBehaviour
                 GameManager.Instance.switchLevel = true;
                 GameManager.Instance.playerActive = false;
                 this.gameObject.SetActive(false);
+
             }
         }
     }
@@ -168,12 +171,5 @@ public class PlayerController : MonoBehaviour
         powerUpIndicator.intensity = 0.0f;
     }
 
-    private void RestartScene()
-    {
-        // Get the current scene index
-        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-
-        // Reload the current scene
-        SceneManager.LoadScene(currentSceneIndex);
-    }
+   
 }
