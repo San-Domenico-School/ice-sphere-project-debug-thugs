@@ -6,9 +6,8 @@ using TMPro;
 public class HitCounter : MonoBehaviour
 {
     [SerializeField] private int scoreAdded = 1;
-    private TextMeshProUGUI scoreboardText;
+    [SerializeField] private TextMeshProUGUI scoreboardText;
     public float score;
-    private HashSet<Collider> collidedPlatforms = new HashSet<Collider>(); // To track collided platforms
 
     public static HitCounter Instance;
 
@@ -26,9 +25,8 @@ public class HitCounter : MonoBehaviour
         Debug.Log("Collision detected with platform."); // Add this line for debugging
 
         // Check if the collision is with a platform and if it's the first time
-        if (collision.gameObject.CompareTag("Fox") && !collidedPlatforms.Contains(collision.collider))
+        if (collision.gameObject.CompareTag("Fox"))
         {
-            collidedPlatforms.Add(collision.collider); // Mark the platform as collided
 
             // Increase the score (you can adjust this as needed)
             score += scoreAdded; // Example: Add # points for each platform collision
