@@ -6,7 +6,7 @@ public class PlayerCam : MonoBehaviour
 {
     public float sensX;
     public float sensY;
-    public float distanceFromPlayer = 2f; // Distance from the player where the camera should be positioned
+    public float distanceFromPlayer = 1f; // Distance from the player where the camera should be positioned
 
     private Transform player; // Reference to the player's transform
 

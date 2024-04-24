@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-
 /************************************************************************
  * PlayerController is attached to the Player  It moves the player with 
  * user controls and detects collisions.
