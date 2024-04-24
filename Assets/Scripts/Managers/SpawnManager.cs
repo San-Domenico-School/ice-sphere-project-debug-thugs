@@ -68,7 +68,7 @@ public class SpawnManager : MonoBehaviour
         }
 
         // Initiates a new wave when there is no longer an Ice Spheres present
-        if (FindObjectsOfType<IceSphereController>().Length == 0)
+        if (FindObjectsOfType<IceSphereController>().Length == 0)  // From old ice controller
         {
             SpawnIceWave();
         }
