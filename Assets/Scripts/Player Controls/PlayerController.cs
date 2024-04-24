@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
         powerUpIndicator.intensity = 0;             // Makes sure the powerup indicator light if off on startup
         DontDestroyOnLoad(gameObject);              // Allows player to move between scenes
     }
-    /*
+    
     // Adds OnMovement events to inputAction's Player's movement
     private void OnEnable()
     {
@@ -60,11 +60,11 @@ public class PlayerController : MonoBehaviour
         inputAction.Player.Movement.performed -= OnMovementPerformed;
         inputAction.Player.Movement.canceled -= OnMovementCanceled;
     }
-    */
+    
     // FixedUpdate is called once per frame using physics system
     void FixedUpdate()
     {
-
+        Move();
         // End of game condition
         if (transform.position.y < -10)
         {
@@ -88,7 +88,7 @@ public class PlayerController : MonoBehaviour
             hasPowerUp = true;
         }
     }
-    /*
+    
     // Called when movement binding is performed
     private void OnMovementPerformed(InputAction.CallbackContext value)
     {
@@ -102,19 +102,19 @@ public class PlayerController : MonoBehaviour
     }
 
     // Adds force for player motion
-    /*
-     * private void Move()
+    
+    private void Move()
     {
         if (focalpoint != null)
         {
             playerRB.AddForce(focalpoint.forward.normalized * forwardOrBackward * moveForceMagnitude);
         }
     }
-    */
+    
     private void OnCollisionEnter(Collision collision)
     {
         // Changes Startup to ground so that the player is not constantly updating while colliding with the ground
-        if (collision.gameObject.CompareTag("Startup"))
+        if (collision.gameObject.CompareTag("Startup") || collision.gameObject.CompareTag("Ground"))
         {
             collision.gameObject.tag = "Ground";
             playerCollider.material.bounciness = GameManager.Instance.playerBounce;
