@@ -23,8 +23,8 @@ public class PlayerController : MonoBehaviour
     private float forwardOrBackward;              // Direction of movement (forward or backwards)
     public bool hasPowerUp { get; private set; }  // Allows SpawnManager to detect powerup on player
 
-   // Creates a new InputAction object
-   void Awake()
+    // Creates a new InputAction object
+    void Awake()
     {
         inputAction = new PlayerInputActions();
     }
@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
         powerUpIndicator.intensity = 0;             // Makes sure the powerup indicator light if off on startup
         DontDestroyOnLoad(gameObject);              // Allows player to move between scenes
     }
-
+    /*
     // Adds OnMovement events to inputAction's Player's movement
     private void OnEnable()
     {
@@ -59,14 +59,13 @@ public class PlayerController : MonoBehaviour
         inputAction.Player.Movement.performed -= OnMovementPerformed;
         inputAction.Player.Movement.canceled -= OnMovementCanceled;
     }
-
+    */
     // FixedUpdate is called once per frame using physics system
     void FixedUpdate()
     {
-        Move();
 
         // End of game condition
-        if(transform.position.y < -10)
+        if (transform.position.y < -10)
         {
             GameManager.Instance.gameOver = true;
             Debug.Log("You Lost");                 //*****   More will go here after Prototype  ***** //
@@ -76,7 +75,7 @@ public class PlayerController : MonoBehaviour
 
     // Updates player's field between levels when the player hits the ground triggered in OnCollisionEnter
     private void AssignLevelValues()
-    { 
+    {
         transform.localScale = GameManager.Instance.playerScale;
         playerRB.mass = GameManager.Instance.playerMass;
         playerRB.drag = GameManager.Instance.playerDrag;
@@ -88,7 +87,7 @@ public class PlayerController : MonoBehaviour
             hasPowerUp = true;
         }
     }
-
+    /*
     // Called when movement binding is performed
     private void OnMovementPerformed(InputAction.CallbackContext value)
     {
@@ -102,18 +101,19 @@ public class PlayerController : MonoBehaviour
     }
 
     // Adds force for player motion
-    private void Move()
+    /*
+     * private void Move()
     {
         if (focalpoint != null)
         {
             playerRB.AddForce(focalpoint.forward.normalized * forwardOrBackward * moveForceMagnitude);
         }
     }
-
+    */
     private void OnCollisionEnter(Collision collision)
     {
         // Changes Startup to ground so that the player is not constantly updating while colliding with the ground
-        if(collision.gameObject.CompareTag("Startup"))
+        if (collision.gameObject.CompareTag("Startup"))
         {
             collision.gameObject.tag = "Ground";
             playerCollider.material.bounciness = GameManager.Instance.playerBounce;
@@ -124,7 +124,7 @@ public class PlayerController : MonoBehaviour
     // Triggers are on portals and powerups
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.CompareTag("Portal"))
+        if (other.gameObject.CompareTag("Portal"))
         {
             gameObject.layer = LayerMask.NameToLayer("Portal");
 
@@ -133,7 +133,7 @@ public class PlayerController : MonoBehaviour
 
         }
 
-        if(other.gameObject.CompareTag("PowerUp"))
+        if (other.gameObject.CompareTag("PowerUp"))
         {
             PowerUpController powerUpController = other.gameObject.GetComponent<PowerUpController>();
             other.gameObject.SetActive(false);
@@ -149,12 +149,13 @@ public class PlayerController : MonoBehaviour
             gameObject.layer = LayerMask.NameToLayer("Player");
 
             // differentiates between the player going into the portal and popping up over the portal
-            if(transform.position.y < other.transform.position.y - 1)
+            if (transform.position.y < other.transform.position.y - 1)
             {
                 transform.position = Vector3.up * 25;
                 GameManager.Instance.switchLevel = true;
                 GameManager.Instance.playerActive = false;
                 this.gameObject.SetActive(false);
+
             }
         }
     }
@@ -178,3 +179,4 @@ public class PlayerController : MonoBehaviour
         SceneManager.LoadScene(currentSceneIndex);
     }
 }
+

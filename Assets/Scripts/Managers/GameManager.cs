@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 /*************************************************************************
  * Game manager is attached to a Game Manager game objects in every scene 
@@ -25,6 +26,7 @@ public class GameManager : MonoBehaviour
     public float playerRepelForce;
     public GameObject player;
 
+    
 
     // Length determined in the GDD
     [Header("Levels Fields")]
@@ -44,6 +46,21 @@ public class GameManager : MonoBehaviour
     public bool playerActive { private get; set; }      // Set from player with it falls below -10 meter
 
     public bool resetLevel { get; set; }
+
+
+    /*****
+
+    //egg fields
+    public int startEggsInScene;
+    public TMP_Text siblingsSaved;
+    public Canvas canvas;
+    public int eggsCollected;
+    public string sceneName;
+    public GameManager gameManager;
+    public SpawnManager spawnManager;
+    public GameObject portal;
+
+    *****/
 
     // Awake is called before any Start methods are called  It insures that the Game Manager is
     // there for the Player and Ice SPhere to get field valued from the GDD
@@ -66,6 +83,24 @@ public class GameManager : MonoBehaviour
 
 
     }
+
+    
+
+    private void OnEnable()
+    {
+        player = FindAnyObjectByType<PlayerController>().gameObject;
+
+        //startEggsInScene = FindObjectsOfType<EggsExists>().Length;
+        //siblingsSaved = GameObject.FindObjectOfType<Canvas>().GetComponentInChildren<TMP_Text>();
+        //siblingsSaved.text = "Siblings Saved: " + eggsCollected + "/" + startEggsInScene;
+        //sceneName = SceneManager.GetActiveScene().name;
+        //gameManager = this.GetComponent<GameManager>();
+        //spawnManager = FindAnyObjectByType<SpawnManager>().GetComponent<SpawnManager>();
+        //portal = Resources.FindObjectsOfTypeAll<ZoomInAnimator>()[0].gameObject;
+        //canvas = GameObject.FindObjectOfType<Canvas>();
+    }
+
+    
 
     // Update is called once per frame checking if ready to switch levels
     void Update()
@@ -91,6 +126,8 @@ public class GameManager : MonoBehaviour
 
         // Extract the level number from the scene name
         int nextLevel = int.Parse(currentScene.Substring(5)) + 1;
+
+        SceneManager.LoadScene("Level" + nextLevel.ToString());
 
         // Checks to see if you're at the last level
         if (nextLevel <= SceneManager.sceneCountInBuildSettings - 1)
