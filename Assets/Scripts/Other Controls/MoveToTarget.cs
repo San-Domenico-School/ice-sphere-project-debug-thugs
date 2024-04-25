@@ -18,7 +18,6 @@ public class MoveToTarget : MonoBehaviour
     private GameObject target;              // Player set as target via Find method
     private Rigidbody targetRB;             // Player's rigidbody
 
-
     // Used to set Player's rigidbody as target.
     void Start()
     {
