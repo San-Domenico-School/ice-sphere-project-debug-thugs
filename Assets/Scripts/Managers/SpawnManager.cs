@@ -36,10 +36,10 @@ public class SpawnManager : MonoBehaviour
     [Header("Island")]
     [SerializeField] private GameObject island;
 
-    private Vector3 islandSize;     // Use to insure spawn location is on island
-    private int waveNumber;         // Keeps track of which spawn number your on.
-    private bool portalActive;      // Toggle true when a portal is in the scene so only one portal is on scene at a time
-    private bool powerUpActive;     // Toggle true when a powerUp is in the scene so only one powerUp is on scene at a time
+    private Vector3 islandSize;                      // Use to insure spawn location is on island
+    private int waveNumber;                          // Keeps track of which spawn number your on.
+    public bool portalActive { get; set; }   // Set true by player when all eggs collected
+    private bool powerUpActive;                      // Toggle true when a powerUp is in the scene so only one powerUp is on scene at a time
 
     // Start is called before the first frame update
     void Start()
@@ -59,11 +59,6 @@ public class SpawnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Makes sure that the postal does not appear until what is stated in the GDD and only if one is not already present
-        if ((waveNumber > portalFirstAppearance || GameManager.Instance.debugSpawnPortal) && !portalActive)
-        {
-            SetObjectActive(portal, portalByWaveProbability);
-        }
 
         // Makes sure that the powerUp does not appear until what is stated in the GDD and only if one is not already present
         if ((waveNumber > powerUpFirstAppearance || GameManager.Instance.debugSpawnPowerUp)
@@ -95,13 +90,15 @@ public class SpawnManager : MonoBehaviour
     }
 
     // Calls the spawn routine 
-    private void SetObjectActive(GameObject obj, float byWaveProbability)
+    public void SetObjectActive(GameObject obj, float waveProbability)
     {
-        if(Random.value < waveNumber * byWaveProbability * Time.deltaTime ||
-           GameManager.Instance.debugSpawnPortal || GameManager.Instance.debugSpawnPowerUp)
+        obj.transform.position = SetRandomPosition(obj.transform.position.y);
+        portal.SetActive(true);
+
+        if (Random.value < waveNumber * waveProbability * Time.deltaTime)
         {
             obj.transform.position = SetRandomPosition(obj.transform.position.y);
-            StartCoroutine(CountdownTimer(obj.tag));
+            portal.SetActive(true);
         }
     }
 
