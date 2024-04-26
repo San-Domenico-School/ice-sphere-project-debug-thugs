@@ -119,6 +119,8 @@ public class PlayerController : MonoBehaviour
             playerCollider.material.bounciness = GameManager.Instance.playerBounce;
             AssignLevelValues();
         }
+
+        
     }
 
     // Triggers are on portals and powerups
@@ -178,5 +180,7 @@ public class PlayerController : MonoBehaviour
         // Reload the current scene
         SceneManager.LoadScene(currentSceneIndex);
     }
+
+    
 }
 
