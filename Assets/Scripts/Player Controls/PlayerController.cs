@@ -69,8 +69,10 @@ public class PlayerController : MonoBehaviour
         {
             GameManager.Instance.gameOver = true;
             Debug.Log("You Lost");                 //*****   More will go here after Prototype  ***** //
-            gameObject.SetActive(false);
-            //GameManager.Instance.RestartScene();
+            //gameObject.SetActive(false);
+            Destroy(this);
+
+            GameManager.Instance.RestartScene();
         }
     }
 
