@@ -69,7 +69,10 @@ public class PlayerController : MonoBehaviour
         {
             GameManager.Instance.gameOver = true;
             Debug.Log("You Lost");                 //*****   More will go here after Prototype  ***** //
-            gameObject.SetActive(false);
+            //gameObject.SetActive(false);
+            Destroy(this);
+
+            GameManager.Instance.RestartScene();
         }
     }
 
@@ -172,6 +175,8 @@ public class PlayerController : MonoBehaviour
         powerUpIndicator.intensity = 0.0f;
     }
 
+
+    /*****
     private void RestartScene()
     {
         // Get the current scene index
@@ -180,6 +185,7 @@ public class PlayerController : MonoBehaviour
         // Reload the current scene
         SceneManager.LoadScene(currentSceneIndex);
     }
+    ********/
 
     
 }
