@@ -144,7 +144,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void RestartScene()
+    public void RestartScene()
     {
         // Get the current scene index
         string sceneName = SceneManager.GetActiveScene().name;
