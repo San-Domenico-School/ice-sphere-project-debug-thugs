@@ -9,12 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Roguelike Prototypes/Player SelectionScene.unity
     guid: 6f7ba239cdf7549c2b4e8bc44fd6a43a
   - enabled: 1
-    path: Assets/Scenes/Roguelike Prototypes/Level1Original.unity
-    guid: a4b96ad7a65484fd4a83cb97540eee50
+    path: Assets/Scenes/Dungeons and Dens/Level1.unity
+    guid: 1ffb84fe785654783b0c9f481f13960c
   - enabled: 1
-    path: Assets/Scenes/Roguelike Prototypes/Level2.unity
-    guid: 229d958f09bba43e8ae251d33f241a29
-  - enabled: 1
-    path: Assets/Scenes/Roguelike Prototypes/Level3.unity
-    guid: bd60a8ba58a9347fea06f8bd02648e05
+    path: Assets/Scenes/Dungeons and Dens/Level2.unity
+    guid: cd21d5698efde4d45b46ad36e84b6309
   m_configObjects: {}
