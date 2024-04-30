@@ -78,8 +78,13 @@ public class GameManager : MonoBehaviour
 
         GameObject player = Resources.FindObjectsOfTypeAll<PlayerController>()[0].gameObject;
         player.transform.position = Vector3.up * 25;
-        player.SetActive(true);
-        //find the player and set it active
+
+        if(GameObject.Find("Player") == null)
+        {
+            player.SetActive(true);
+            //find the player and set it active
+        }
+
 
 
     }
@@ -88,7 +93,7 @@ public class GameManager : MonoBehaviour
 
     private void OnEnable()
     {
-        player = FindAnyObjectByType<PlayerController>().gameObject;
+        player = FindAnyObjectByType<PlayerController>(0).gameObject;
 
         //startEggsInScene = FindObjectsOfType<EggsExists>().Length;
         //siblingsSaved = GameObject.FindObjectOfType<Canvas>().GetComponentInChildren<TMP_Text>();
@@ -144,13 +149,18 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void RestartScene()
+    public void RestartScene()
     {
-        // Get the current scene index
-        string sceneName = SceneManager.GetActiveScene().name;
 
-        // Reload the current scene
-        SceneManager.LoadScene(sceneName);
+        if(gameOver)
+        {
+            // Get the current scene index
+            string sceneName = SceneManager.GetActiveScene().name;
+
+            // Reload the current scene
+            SceneManager.LoadScene(sceneName);
+        }
+       
     }
 
 
